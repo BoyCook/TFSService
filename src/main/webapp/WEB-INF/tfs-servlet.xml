@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.5.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- Package to find the Controller classes-->
+    <context:component-scan base-package="org.cccs.tfs.web" annotation-config="true" use-default-filters="false">
+        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan>
+
+    <!-- Enable annotation based mapping. This is where the DispatcherServlet hands control to -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <util:list id="beanList">
+                <ref bean="stringHttpMessageConverter"/>
+                <ref bean="marshallingHttpMessageConverter"/>
+            </util:list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
+          id="defaultHandlerMapping"
+          primary="false" />
+
+    <!--SimpleUrlHandlerMapping-->
+    <bean id="handlerMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <bean id="siteActiveInterceptor" class="org.cccs.tfs.web.SiteActiveInterceptor" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="exceptionResolver" class="org.cccs.tfs.web.ExceptionResolver">
+        <property name="statusCodeMappings">
+            <map>
+                <entry key="javax.persistence.EntityNotFoundException" value="404"/>
+                <entry key="javax.validation.ValidationException" value="422"/>
+            </map>
+        </property>
+        <property name="marshaller" ref="marshaller"/>
+    </bean>
+
+    <!--BeanNameUrlHandlerMapping-->
+    <!-- TODO: look at Handler Interceptors-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="mediaTypes">
+            <map>
+                <entry key="xml" value="text/xml"/>
+                <entry key="xls" value="application/vnd.ms-excel"/>
+                <entry key="zip" value="application/zip"/>
+                <entry key="html" value="application/html" />
+            </map>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                <bean id="simpleViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <!-- Re-direct *.html to /html/*.html -->
+                    <property name="prefix" value="/html/"/>
+                    <property name="suffix" value=".html"/>
+                </bean>
+                <bean id="urlViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+                    <!-- Re-direct *.jsp to /jsp/*.jsp -->
+                    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+                    <property name="prefix" value="/jsp/"/>
+                    <property name="suffix" value=".jsp"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000"/>
+    </bean>
+
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+    <bean id="marshallingHttpMessageConverter"
+          class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+        <property name="marshaller" ref="marshaller"/>
+        <property name="unmarshaller" ref="marshaller"/>
+    </bean>
+
+    <!-- Hook the marshaller into the view -->
+    <bean id="marshallingView"
+          class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <property name="modelKey" value="domain-data"/>
+        <property name="marshaller" ref="marshaller"/>
+        <property name="contentType" value="application/xml"/>
+    </bean>
+
+    <!-- XStream marshaller for oxm -->
+    <bean id="marshaller"
+          class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="aliases">
+            <props>
+                <prop key="principal">org.cccs.tfs.domain.Principal</prop>
+                <prop key="location">org.cccs.tfs.domain.Location</prop>
+                <prop key="exception">org.cccs.tfs.web.ExceptionResponse</prop>
+                <prop key="resources">java.util.List</prop>
+            </props>
+        </property>
+        <property name="converters">
+            <list>
+                <bean class="org.cccs.tfs.integration.oxm.PrincipalConverter"/>
+                <bean class="org.cccs.tfs.integration.oxm.LocationConverter"/>
+            </list>
+        </property>
+        <property name="mode" value="1001"/>
+    </bean>
+
+    <bean class="org.cccs.tfs.web.FileView" id="fileView">
+        <property name="contentType" value="image/jpeg"/>
+    </bean>
+
+</beans>
+        

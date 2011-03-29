@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <context:property-placeholder location="classpath:*.properties"/>
+    <context:component-scan base-package="org.cccs.tfs.web"/>
+
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <bean id="principalFinder"
+          scope="prototype"
+          class="${test.finder.class}">
+    </bean>
+
+    <bean id="principalService"
+          scope="prototype"
+          class="${test.service.class}">
+    </bean>
+
+    <bean id="dataInstaller"
+          scope="singleton"
+          init-method="install"
+          class="${test.data.installer.class}">
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="false"/>
+                <property name="generateDdl" value="true"/>
+                <property name="databasePlatform" value="${test.database.dialect}"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+        <property name="driverClassName" value="${test.database.driverClassName}"/>
+        <property name="url" value="${test.database.url}"/>
+        <property name="username" value="${test.database.username}"/>
+        <property name="password" value="${test.database.password}"/>
+    </bean>
+
+    <bean id="marshaller"
+          class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="aliases">
+            <props>
+                <prop key="principal">org.cccs.tfs.domain.Principal</prop>
+                <prop key="location">org.cccs.tfs.domain.Location</prop>
+                <prop key="exception">org.cccs.tfs.web.ExceptionResponse</prop>
+                <prop key="resources">java.util.List</prop>
+            </props>
+        </property>
+        <property name="converters">
+            <list>
+                <bean class="org.cccs.tfs.integration.oxm.PrincipalConverter"/>
+                <bean class="org.cccs.tfs.integration.oxm.LocationConverter"/>
+            </list>
+        </property>
+        <property name="mode" value="1001"/>
+    </bean>
+
+    <bean id="marshallingHttpMessageConverter"
+          class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+        <property name="marshaller" ref="marshaller"/>
+        <property name="unmarshaller" ref="marshaller"/>
+    </bean>
+</beans>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>User Details</title>
+    <link type="text/css" href="css/redmond/jquery-ui-1.8.2.custom.css" rel="Stylesheet"/>
+    <link type="text/css" href="css/default.css" rel="Stylesheet"/>
+    <link type="text/css" href="css/jquery.notice.css" rel="Stylesheet"/>
+    <link type="text/css" href="css/jquery.validate.css" rel="Stylesheet"/>
+    <script type="text/javascript" src="js/libs/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-ui-1.8.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.notice.js"></script>
+    <script type="text/javascript" src="js/libs/sarissa-compressed.js"></script>
+    <script type="text/javascript" src="js/libs/jsMap.js"></script>
+    <script type="text/javascript" src="js/libs/jsXslt.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.validator.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.xslTransform.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/friend.finder.js"></script>
+    <script type="text/javascript" src="js/user.bindings.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        uiBinding();
+    });
+    </script>
+</head>
+<body>
+<div id="main">
+    <div id="actions" style="margin-bottom:10px">
+        <input type="button" id="showAddFriend" value="Add Friend">
+        <input type="button" id="removeFriend" value="Remove Friend">
+    </div>
+    <div id="userDetails"></div>
+
+    <div id="addFriendDialog">
+        <div id="otherUsers"></div>
+    </div>
+</div>
+
+</body>
+</html>
