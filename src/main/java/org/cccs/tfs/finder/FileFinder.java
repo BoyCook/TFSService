@@ -102,7 +102,8 @@ public class FileFinder implements Finder<File> {
             String[] values = parameters.get(key);
 
             for (String value: values) {
-                query.setParameter(i, "%" + value + "%");
+                query.setParameter(i, value);
+//                query.setParameter(i, "%" + value + "%");
                 i++;
             }
         }

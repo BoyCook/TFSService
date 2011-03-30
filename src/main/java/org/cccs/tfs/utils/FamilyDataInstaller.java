@@ -1,7 +1,9 @@
 package org.cccs.tfs.utils;
 
+import org.cccs.tfs.domain.File;
 import org.cccs.tfs.domain.Location;
 import org.cccs.tfs.domain.Principal;
+import org.cccs.tfs.service.FileService;
 import org.cccs.tfs.service.PrincipalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,9 @@ public class FamilyDataInstaller implements Installer {
 
     @Autowired
     public PrincipalService service;
+
+    @Autowired
+    public FileService fileService;
 
     public FamilyDataInstaller() {}
 
@@ -50,6 +55,11 @@ public class FamilyDataInstaller implements Installer {
             principal6.addFriend(principal5);
 
             service.create(principal6);
+
+            fileService.create(new File("org.cccs.jslibs", "jsmap", "1.0", "https://github.com/BoyCook/JSLibs/raw/master/map/lib/jsMap.js"));
+            fileService.create(new File("org.cccs.jslibs", "jquery.hintbox", "1.0", "https://github.com/BoyCook/JSLibs/raw/master/jquery.hintbox/lib/jquery.hintbox.js"));
+            fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));
+            fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0.0", "https://github.com/BoyCook/JSLibs/raw/master/jquery.madeup/lib/jquery.collapsible.js"));
         } catch (Exception e) {
             log.debug("Error installing data");
             log.debug(e.getMessage());
