@@ -37,6 +37,7 @@ public class FileFinder implements Finder<File> {
         return result;
     }
 
+    @Deprecated
     @Override
     public File find(Object businessKey) {
         throw new UnsupportedOperationException("There is no single unique business key for a File");

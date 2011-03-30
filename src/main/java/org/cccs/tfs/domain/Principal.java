@@ -14,8 +14,8 @@ import java.util.Set;
  * Time: 6:52:43 PM
  */
 @Entity
-@Table( name = "principals" )
-@Unique(entity = Principal.class, idField = "id", uniqueField = "shortName", message = "Short Name must be unique")
+@Table(name = "principals")
+@Unique(entity = Principal.class, idField = "id", uniqueFields = {"shortName"}, message = "Short Name must be unique")
 @XStreamAlias("principal")
 public class Principal {
 

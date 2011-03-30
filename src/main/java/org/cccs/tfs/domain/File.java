@@ -1,11 +1,10 @@
 package org.cccs.tfs.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.cccs.tfs.service.Unique;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * User: boycook
@@ -13,7 +12,19 @@ import javax.persistence.Table;
  * Time: 20:58
  */
 @Entity
-@Table(name="files")
+@Table(name="files",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {
+                "artefactId",
+                "groupId",
+                "version"
+            })
+        })
+@Unique(entity = File.class, idField = "id", uniqueFields = {
+                "artefactId",
+                "groupId",
+                "version"
+            }, message = "Short Name must be unique")
 @XStreamAlias("file")
 public class File {
 
@@ -48,6 +59,7 @@ public class File {
         this.id = id;
     }
 
+    @NotEmpty(message = "GroupID cannot be empty")
     public String getGroupId() {
         return groupId;
     }
@@ -56,6 +68,7 @@ public class File {
         this.groupId = groupId;
     }
 
+    @NotEmpty(message = "ArtefactID cannot be empty")
     public String getArtefactId() {
         return artefactId;
     }
@@ -64,6 +77,7 @@ public class File {
         this.artefactId = artefactId;
     }
 
+    @NotEmpty(message = "Version cannot be empty")
     public String getVersion() {
         return version;
     }
@@ -72,6 +86,7 @@ public class File {
         this.version = version;
     }
 
+    @NotEmpty(message = "File URL cannot be empty")
     public String getUrl() {
         return url;
     }
@@ -110,5 +125,14 @@ public class File {
 
     public void setStorageType(String storageType) {
         this.storageType = storageType;
+    }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "groupId='" + groupId + '\'' +
+                ", artefactId='" + artefactId + '\'' +
+                ", version='" + version + '\'' +
+                '}';
     }
 }

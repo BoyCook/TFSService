@@ -3,12 +3,13 @@ package org.cccs.tfs.service;
 import org.cccs.tfs.domain.Location;
 import org.cccs.tfs.domain.Principal;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
+import javax.validation.Validator;
+import java.util.Set;
 
 /**
  * User: boycook
@@ -16,9 +17,6 @@ import javax.validation.ValidationException;
  * Time: 21:06
  */
 public class PrincipalService extends BaseService<Principal>{
-
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
 
     @Override
     public Principal create(Principal principal) {
@@ -86,6 +84,18 @@ public class PrincipalService extends BaseService<Principal>{
         session.close();
 
         return true;
+    }
+
+    @Override
+    protected void validate(Principal principal) {
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Principal>> violations = validator.validate(principal);
+
+        if (violations.size() > -0) {
+            log.debug(principal.getFullName() + " has " + violations.size() + " violations");
+            ConstraintViolation violation = (ConstraintViolation) violations.toArray()[0];
+            throw new ValidationException("Principal validation has failed: " + violation.getMessageTemplate());
+        }
     }
 
     public Principal addFriend(Principal principal, Principal friend) {

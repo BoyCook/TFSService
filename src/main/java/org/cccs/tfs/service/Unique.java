@@ -17,7 +17,7 @@ public @interface Unique {
     String message() default "Unique constraint violation has occurred";
     Class<?> entity();
     String idField();
-    String uniqueField();
+    String[] uniqueFields();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

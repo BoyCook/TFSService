@@ -45,7 +45,7 @@ public class TestPrincipalService {
     }
 
     @Test
-    public void a01createNewShouldWork() {
+    public void a01CreateNewShouldWork() {
         assertSize(3);
         service.create(bobSmith);
         service.create(johnDoe);
@@ -55,19 +55,19 @@ public class TestPrincipalService {
     }
 
     @Test(expected = ValidationException.class)
-    public void a02createDuplicateShouldFail() {
+    public void a02CreateDuplicateShouldFail() {
         service.create(tomJones);
         tomJones.setId(0);
         service.create(tomJones);
     }
 
     @Test(expected = ValidationException.class)
-    public void a03createWithMissingNotNullFieldsShouldFail() {
+    public void a03CreateWithMissingNotNullFieldsShouldFail() {
         service.create(gregJones);
     }
 
     @Test
-    public void a04updateShouldWork() {
+    public void a04UpdateShouldWork() {
         setLoggedInUser(bobSmith.getShortName());
         Principal p1 = finder.find(bobSmith.getShortName());
         p1.setEmail("foo");
@@ -77,7 +77,7 @@ public class TestPrincipalService {
     }
 
     @Test
-    public void a05updateLocationShouldWork() {
+    public void a05UpdateLocationShouldWork() {
         setLoggedInUser(bobSmith.getShortName());
         Principal p1 = finder.find(bobSmith.getShortName());
         Location location = new Location(123, 456);
@@ -89,14 +89,14 @@ public class TestPrincipalService {
     }
 
     @Test(expected = SecurityException.class)
-    public void a06updateLocationShouldFailForWrongUser() {
+    public void a06UpdateLocationShouldFailForWrongUser() {
         setLoggedInUser(null);
         Principal p1 = finder.find(bobSmith.getShortName());
         service.updateLocation(p1, new Location(123, 456));
     }
 
     @Test(expected = SecurityException.class)
-    public void a07updateShouldWorkFailForWrongUser() {
+    public void a07UpdateShouldWorkFailForWrongUser() {
         setLoggedInUser(null);
         Principal p1 = finder.find(bobSmith.getShortName());
         p1.setEmail("foo");
@@ -104,14 +104,14 @@ public class TestPrincipalService {
     }
 
     @Test(expected = ValidationException.class)
-    public void a08addFriendShouldFailWithoutFriendRequest() {
+    public void a08AddFriendShouldFailWithoutFriendRequest() {
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
         service.addFriend(bs1, tj1);
     }
 
     @Test
-    public void a09addFriendRequestShouldWork() {
+    public void a09AddFriendRequestShouldWork() {
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
         service.addFriendRequest(bs1, tj1);
@@ -126,7 +126,7 @@ public class TestPrincipalService {
     }
 
     @Test(expected = SecurityException.class)
-    public void a10addFriendShouldFailForWrongUser() {
+    public void a10AddFriendShouldFailForWrongUser() {
         setLoggedInUser(null);
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
@@ -134,7 +134,7 @@ public class TestPrincipalService {
     }
 
     @Test
-    public void a11addFriendShouldWork() {
+    public void a11AddFriendShouldWork() {
         setLoggedInUser(bobSmith.getShortName());
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
@@ -154,7 +154,7 @@ public class TestPrincipalService {
     }
 
     @Test(expected = SecurityException.class)
-    public void a12declineFriendRequestShouldFailForWrongUser() {
+    public void a12DeclineFriendRequestShouldFailForWrongUser() {
         setLoggedInUser(johnDoe.getShortName());
         Principal john1 = finder.find(johnDoe.getShortName());
         Principal jane1 = finder.find(janeDoe.getShortName());
@@ -179,7 +179,7 @@ public class TestPrincipalService {
     }
 
     @Test
-    public void a13declineFriendRequestShouldWork() {
+    public void a13DeclineFriendRequestShouldWork() {
         setLoggedInUser(johnDoe.getShortName());
         Principal john1 = finder.find(johnDoe.getShortName());
         Principal jane1 = finder.find(janeDoe.getShortName());
@@ -196,14 +196,14 @@ public class TestPrincipalService {
     }
 
     @Test(expected = ValidationException.class)
-    public void a14declineFriendRequestShouldFailIfThereIsNoRequest() {
+    public void a14DeclineFriendRequestShouldFailIfThereIsNoRequest() {
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
         service.removeFriendRequest(bs1, tj1);
     }
 
     @Test(expected = SecurityException.class)
-    public void a15removeFriendShouldFailForWrongUser() {
+    public void a15RemoveFriendShouldFailForWrongUser() {
         setLoggedInUser(null);
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
@@ -211,7 +211,7 @@ public class TestPrincipalService {
     }
 
     @Test
-    public void a16removeFriendShouldWork() {
+    public void a16RemoveFriendShouldWork() {
         setLoggedInUser(bobSmith.getShortName());
         Principal bs1 = finder.find(bobSmith.getShortName());
         Principal tj1 = finder.find(tomJones.getShortName());
@@ -227,7 +227,7 @@ public class TestPrincipalService {
     }
 
     @Test
-    public void a17deleteShouldWork() {
+    public void a17DeleteShouldWork() {
         Principal p1 = finder.find(bobSmith.getShortName());
         Principal p2 = finder.find(tomJones.getShortName());
         Principal p3 = finder.find(johnDoe.getShortName());
@@ -245,11 +245,6 @@ public class TestPrincipalService {
 
     private void assertSize(int size) {
         List<Principal> list = finder.all();
-
-        for (Principal p: list) {
-            System.out.println("#### " + p.getFullName());
-        }
-
         assertThat(list.size(), is(equalTo(size)));
     }
 }

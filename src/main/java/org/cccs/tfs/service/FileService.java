@@ -2,11 +2,13 @@ package org.cccs.tfs.service;
 
 import org.cccs.tfs.domain.File;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.validation.ConstraintViolation;
+import javax.validation.ValidationException;
+import javax.validation.Validator;
+import java.util.Set;
 
 /**
  * User: boycook
@@ -15,11 +17,10 @@ import javax.persistence.EntityTransaction;
  */
 public class FileService extends BaseService<File> {
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
-
     @Override
     public File create(File file) {
+        validate(file);
+
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
         final EntityTransaction txn = entityManager.getTransaction();
         final Session session = (Session) entityManager.getDelegate();
@@ -36,6 +37,7 @@ public class FileService extends BaseService<File> {
 
             if(txn.isActive())
                 txn.rollback();
+
         } finally {
             if(txn.isActive())
                 txn.rollback();
@@ -47,6 +49,7 @@ public class FileService extends BaseService<File> {
 
     @Override
     public File update(File file) {
+        validate(file);
 		final EntityManager entityManager = entityManagerFactory.createEntityManager();
         final EntityTransaction txn = entityManager.getTransaction();
         final Session session = (Session) entityManager.getDelegate();
@@ -72,5 +75,17 @@ public class FileService extends BaseService<File> {
         session.close();
 
         return true;
+    }
+
+    @Override
+    protected void validate(File file) {
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<File>> violations = validator.validate(file);
+
+        if (violations.size() > -0) {
+            log.debug(file.toString() + " has " + violations.size() + " violations");
+            ConstraintViolation violation = (ConstraintViolation) violations.toArray()[0];
+            throw new ValidationException("File validation has failed: " + violation.getMessageTemplate());
+        }
     }
 }
