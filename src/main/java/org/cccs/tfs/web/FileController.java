@@ -38,7 +38,7 @@ public class FileController extends BaseController<File> {
     @RequestMapping(value = "/examples/file", method = RequestMethod.GET)
     public String getExampleUser(final Model model) {
         log.debug("FileController.getExampleFile");
-        File example = new File("exampleGroupID", "exampleArtefactId", "exampleVersion", "exampleURL");
+        File example = new File("exampleGroupID", "exampleArtefactId", "exampleVersion", "ext", "exampleURL");
         model.addAttribute(DOMAIN_DATA, example);
         return MARSHALLER;
     }

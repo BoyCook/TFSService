@@ -38,6 +38,10 @@ public class FileConverter implements Converter {
         writer.setValue(f.getVersion());
         writer.endNode();
 
+        writer.startNode("extension");
+        writer.setValue(f.getExtension());
+        writer.endNode();
+
         writer.startNode("url");
         writer.setValue(f.getUrl());
         writer.endNode();
@@ -85,6 +89,8 @@ public class FileConverter implements Converter {
                 f.setArtefactId(value);
             } else if (node.equalsIgnoreCase("version")) {
                 f.setVersion(value);
+            } else if (node.equalsIgnoreCase("extension")) {
+                f.setExtension(value);
             } else if (node.equalsIgnoreCase("url")) {
                 f.setUrl(value);
             } else if (node.equalsIgnoreCase("name")) {

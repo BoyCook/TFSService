@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestFileService {
 
-    private File array = new File("org.cccs.jslibs", "jsarray", "1.0", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
+    private File array = new File("org.cccs.jslibs", "jsarray", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
 
     @Autowired
     private FileService service;
@@ -47,12 +47,12 @@ public class TestFileService {
 
     @Test(expected = ValidationException.class)
     public void b03CreateWithEmptyNotNullFieldsShouldFail() {
-        service.create(new File("org.cccs.jslibs", "somethingnew", "1.0", ""));
+        service.create(new File("org.cccs.jslibs", "somethingnew", "1.0", "js", ""));
     }
 
     @Test(expected = ValidationException.class)
     public void b03CreateWithNullNotNullFieldsShouldFail() {
-        service.create(new File("org.cccs.jslibs", "somethingnew", "1.0", null));
+        service.create(new File("org.cccs.jslibs", "somethingnew", "1.0", "js", null));
     }
 
     @Test

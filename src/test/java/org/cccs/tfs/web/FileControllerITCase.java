@@ -1,7 +1,6 @@
 package org.cccs.tfs.web;
 
 import org.cccs.tfs.domain.File;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,13 +18,6 @@ public class FileControllerITCase extends JettyIntegrationTestEnvironment {
 
     static {
         overrideWebXML = true;
-    }
-
-    @Before
-    public void login() {
-        if (!getHeaders().containsKey("Cookie")) {
-            login("boycook", "password");
-        }
     }
 
     @Test
