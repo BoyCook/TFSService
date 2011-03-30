@@ -27,12 +27,22 @@
 
     <bean id="principalFinder"
           scope="prototype"
-          class="${test.finder.class}">
+          class="${test.principal.finder.class}">
     </bean>
 
     <bean id="principalService"
           scope="prototype"
-          class="${test.service.class}">
+          class="${test.principal.service.class}">
+    </bean>
+
+    <bean id="fileFinder"
+          scope="prototype"
+          class="${test.file.finder.class}">
+    </bean>
+
+    <bean id="fileService"
+          scope="prototype"
+          class="${test.file.service.class}">
     </bean>
 
     <bean id="dataInstaller"

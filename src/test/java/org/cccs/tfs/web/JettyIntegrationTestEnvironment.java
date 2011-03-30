@@ -47,7 +47,7 @@ import static org.junit.Assert.assertThat;
 @SuppressWarnings({"unchecked"})
 @ContextConfiguration(locations = "classpath:testApplicationContext.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class JettyIntegrationTestEnvironment {
+public abstract class JettyIntegrationTestEnvironment {
 
     protected static final Logger log = LoggerFactory.getLogger(JettyIntegrationTestEnvironment.class);
 
