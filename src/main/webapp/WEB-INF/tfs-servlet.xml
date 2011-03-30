@@ -107,6 +107,7 @@
             <props>
                 <prop key="principal">org.cccs.tfs.domain.Principal</prop>
                 <prop key="location">org.cccs.tfs.domain.Location</prop>
+                <prop key="file">org.cccs.tfs.domain.File</prop>
                 <prop key="exception">org.cccs.tfs.web.ExceptionResponse</prop>
                 <prop key="resources">java.util.List</prop>
             </props>
@@ -115,6 +116,7 @@
             <list>
                 <bean class="org.cccs.tfs.integration.oxm.PrincipalConverter"/>
                 <bean class="org.cccs.tfs.integration.oxm.LocationConverter"/>
+                <bean class="org.cccs.tfs.integration.oxm.FileConverter"/>
             </list>
         </property>
         <property name="mode" value="1001"/>
@@ -123,6 +125,5 @@
     <bean class="org.cccs.tfs.web.FileView" id="fileView">
         <property name="contentType" value="image/jpeg"/>
     </bean>
-
 </beans>
         
