@@ -1,7 +1,6 @@
 package org.cccs.tfs.web;
 
 import org.cccs.tfs.domain.File;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 
@@ -9,9 +8,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * User: boycook
@@ -74,18 +71,17 @@ public class FileControllerITCase extends JettyIntegrationTestEnvironment {
         assertThat(f1.getUrl(), is(equalTo(f2.getUrl())));
     }
 
-    @Ignore
     @Test
     public void updateFileShouldWork() {
-        File f1 = new File("org.cccs.jslibs", "jsarray", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
-        http(serviceBaseURL + "files/" + f1.getKey() + "/", f1, HttpMethod.PUT);
+        File f1 = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/jsarray/1.0/");
+        assertNotNull(f1);
+        f1.setWebsite("boycook.com");
+        f1.setDescription("Extensions to array");
 
-        File f2 = (File) httpGet(serviceBaseURL + "files/" + f1.getKey() + "/");
-        assertNotNull(f2);
-        assertThat(f1.getGroupId(), is(equalTo(f2.getGroupId())));
-        assertThat(f1.getArtefactId(), is(equalTo(f2.getArtefactId())));
-        assertThat(f1.getVersion(), is(equalTo(f2.getVersion())));
-        assertThat(f1.getExtension(), is(equalTo(f2.getExtension())));
-        assertThat(f1.getUrl(), is(equalTo(f2.getUrl())));
+        http(serviceBaseURL + "files/" + f1.getKey() + "/", f1, HttpMethod.POST);
+        File f2 = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/jsarray/1.0/");
+
+        assertThat(f1.getWebsite(), is(equalTo(f2.getWebsite())));
+        assertThat(f1.getDescription(), is(equalTo(f2.getDescription())));
     }
 }
