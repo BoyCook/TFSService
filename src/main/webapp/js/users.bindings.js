@@ -1,4 +1,4 @@
 function uiBinding() {
-    $('#userList').xsltBind('css/users.xsl', getBaseUrl() + 'users');
+    $('#userList').xsltBind('xsl/users.xsl', getBaseUrl() + 'users');
     $('#userList').transform();
 }

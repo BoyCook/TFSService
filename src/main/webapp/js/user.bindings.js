@@ -4,11 +4,11 @@ function uiBinding() {
     var id = getQsParam('id');
     var userUrl = getBaseUrl() + 'users/' + id;
 
-    $('#userDetails').xsltBind('css/user.xsl', userUrl, function(xml){
+    $('#userDetails').xsltBind('xsl/user.xsl', userUrl, function(xml){
         userXml = xml;
     });
     $('#userDetails').transform();
-    $('#otherUsers').xsltBind('css/users.xsl', getBaseUrl() + 'users');
+    $('#otherUsers').xsltBind('xsl/users.xsl', getBaseUrl() + 'users');
     $('#otherUsers').transform();
     $('#showAddFriend, #removeFriend').button();
     $('#showAddFriend').click(function(){

@@ -138,6 +138,11 @@ public class File {
         this.storageType = storageType;
     }
 
+    @Transient
+    public String getKey() {
+        return getGroupId() + "/" + getArtefactId() + "/" + getVersion();
+    }
+
     @Override
     public String toString() {
         return "File{" +

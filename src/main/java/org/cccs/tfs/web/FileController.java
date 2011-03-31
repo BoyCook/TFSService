@@ -1,7 +1,6 @@
 package org.cccs.tfs.web;
 
 import org.cccs.tfs.domain.File;
-import org.cccs.tfs.domain.Principal;
 import org.cccs.tfs.finder.FileFinder;
 import org.cccs.tfs.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,30 @@ public class FileController extends BaseController<File> {
         log.debug("Found file: " + file.toString());
 
         model.addAttribute(DOMAIN_DATA, file);
+        return MARSHALLER;
+    }
+
+    @RequestMapping(value = "/files/{groupId}/{artefactId}/{version}", method = RequestMethod.PUT)
+    public String addFile(@PathVariable("groupId") final String groupId,
+                          @PathVariable("artefactId") final String artefactId,
+                          @PathVariable("version") final String version,
+                          @RequestBody final File file,
+                          final Model model, final HttpServletResponse response) {
+        log.debug(format("FileController.addFile: %s/%s/%s", groupId, artefactId, version));
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        model.addAttribute(DOMAIN_DATA, service.create(file));
+        return MARSHALLER;
+    }
+
+    @RequestMapping(value = "/files/{groupId}/{artefactId}/{version}", method = RequestMethod.POST)
+    public String updateUser(@PathVariable("groupId") final String groupId,
+                          @PathVariable("artefactId") final String artefactId,
+                          @PathVariable("version") final String version,
+                          @RequestBody final File file,
+                             final Model model, final HttpServletResponse response) {
+        log.debug(format("FileController.updateUser: %s/%s/%s", groupId, artefactId, version));
+        response.setStatus(HttpServletResponse.SC_RESET_CONTENT);
+        model.addAttribute(DOMAIN_DATA, service.update(file));
         return MARSHALLER;
     }
 }
