@@ -29,12 +29,12 @@ public class TestFileFinder {
 
     @Test
     public void getAllShouldWork() throws Exception {
-        assertThat(finder.all().size(), is(equalTo(4)));
+        assertThat(finder.all().size(), is(equalTo(5)));
     }
 
     @Test
     public void searchByArtefactIdShouldWork() throws Exception {
-        List<File> files = finder.search("jsmap");
+        List<File> files = finder.search("jsMap");
         assertThat(files.size(), is(equalTo(1)));
     }
 

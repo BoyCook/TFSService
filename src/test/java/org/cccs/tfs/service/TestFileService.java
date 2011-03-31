@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestFileService {
 
-    private File array = new File("org.cccs.jslibs", "jsarray", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
+    private File array = new File("org.cccs.jslibs", "newFile", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
 
     @Autowired
     private FileService service;
@@ -35,9 +35,9 @@ public class TestFileService {
 
     @Test
     public void b01CreateShouldWork() {
-        assertSize(4);
-        service.create(array);
         assertSize(5);
+        service.create(array);
+        assertSize(6);
     }
 
     @Test(expected = ValidationException.class)
@@ -74,10 +74,10 @@ public class TestFileService {
 
     @Test
     public void b06DeleteShouldWork() {
-        assertSize(5);
+        assertSize(6);
         File jsArray1 = finder.search("jsarray").get(0);
         service.delete(jsArray1);
-        assertSize(4);
+        assertSize(5);
     }
 
     private void assertSize(int size) {

@@ -56,7 +56,7 @@ public class FamilyDataInstaller implements Installer {
 
             service.create(principal6);
 
-            fileService.create(new File("org.cccs.jslibs", "jsmap", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/map/lib/jsMap.js"));
+            fileService.create(new File("org.cccs.jslibs", "jsMap", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/map/lib/jsMap.js"));
             fileService.create(new File("org.cccs.jslibs", "jquery.hintbox", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.hintbox/lib/jquery.hintbox.js"));
             fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));
             fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));

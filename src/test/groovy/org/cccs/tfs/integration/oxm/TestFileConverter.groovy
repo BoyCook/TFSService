@@ -35,16 +35,16 @@ class TestFileConverter extends XMLTestCase {
 
     private String expectedList = """
         <resources>
-            <file id="12">
-                <id>12</id>
+            <file id="13">
+                <id>13</id>
                 <groupId>org.cccs.jslibs</groupId>
                 <artefactId>jquery.collapsible</artefactId>
                 <version>1.0</version>
                 <extension>js</extension>
                 <url>https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js</url>
             </file>
-            <file id="13">
-                <id>13</id>
+            <file id="14">
+                <id>14</id>
                 <groupId>org.cccs.jslibs</groupId>
                 <artefactId>jquery.collapsible</artefactId>
                 <version>1.0.0</version>
@@ -55,8 +55,8 @@ class TestFileConverter extends XMLTestCase {
     """
 
     private String expectedFile = """
-        <file id="12">
-            <id>12</id>
+        <file id="13">
+            <id>13</id>
             <groupId>org.cccs.jslibs</groupId>
             <artefactId>jquery.collapsible</artefactId>
             <version>1.0</version>
