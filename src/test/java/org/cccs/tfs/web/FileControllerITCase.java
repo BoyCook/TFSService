@@ -36,7 +36,7 @@ public class FileControllerITCase extends JettyIntegrationTestEnvironment {
     public void getFileByGroupIdShouldWork() {
         List<File> files = (List<File>) httpGet(serviceBaseURL + "files/org.cccs.jslibs/");
         assertNotNull(files);
-        assertEquals(4, files.size());
+        assertEquals(5, files.size());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class FileControllerITCase extends JettyIntegrationTestEnvironment {
 
     @Test
     public void addFileShouldWork() {
-        File f1 = new File("org.cccs.jslibs", "jsarray", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
+        File f1 = new File("org.cccs.jslibs", "newFile", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
         http(serviceBaseURL + "files/" + f1.getKey() + "/", f1, HttpMethod.PUT);
 
         File f2 = (File) httpGet(serviceBaseURL + "files/" + f1.getKey() + "/");
