@@ -24,7 +24,7 @@ import javax.persistence.*;
                 "artefactId",
                 "groupId",
                 "version"
-            }, message = "Short Name must be unique")
+            }, message = "File must have unique groupId artefactId version combination")
 @XStreamAlias("file")
 public class File {
 

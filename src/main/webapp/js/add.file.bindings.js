@@ -7,7 +7,7 @@ function getExampleXml(type) {
 }
 
 function uiBinding() {
-    getExampleXml();
+    getExampleXml('file');
 
     $('#addFile').click(function() {
         if ($('#newFile').validate()) {
@@ -31,18 +31,21 @@ function File() {
     this.url = undefined;
 }
 
+File.prototype.key = function() {
+    return this.groupId + '/' + this.artefactId + '/' + this.version;
+};
+
 File.prototype.submit = function() {
     var xml = $(exampleXml).clone()[0];
-    setXMLValue(xml, 'groupId', this.groupId);
-    setXMLValue(xml, 'artefactId', this.artefactId);
-    setXMLValue(xml, 'version', this.version);
-    setXMLValue(xml, 'extension', this.extension);
-    setXMLValue(xml, 'url', this.url);
+    setXMLValue(xml.childNodes, 'groupId', this.groupId);
+    setXMLValue(xml.childNodes, 'artefactId', this.artefactId);
+    setXMLValue(xml.childNodes, 'version', this.version);
+    setXMLValue(xml.childNodes, 'extension', this.extension);
+    setXMLValue(xml.childNodes, 'url', this.url);
 
     var postXml = (new XMLSerializer()).serializeToString(xml);
-    var id = this.groupId + '/' + this.artefactId + '/' + this.version;
-    var url = getBaseUrl() + 'files/' + id;
-    var msg = 'Successfully added: ' + id;
+    var url = getBaseUrl() + 'files/' + this.key() + '/';
+    var msg = 'Successfully added: ' + this.key();
     http(url, 'PUT', 'xml', postXml, function() {
         $.noticeAdd({ text: msg, stay: false, type: 'success-notice'});
     }, null);
