@@ -69,6 +69,12 @@ public class FileConverter implements Converter {
             writer.setValue(f.getWebsite());
             writer.endNode();
         }
+
+        if (isNotEmpty(f.getOrganisation())) {
+            writer.startNode("organisation");
+            writer.setValue(f.getOrganisation());
+            writer.endNode();
+        }
     }
 
     @Override
@@ -101,6 +107,8 @@ public class FileConverter implements Converter {
                 f.setStorageType(value);
             } else if (node.equalsIgnoreCase("website")) {
                 f.setWebsite(value);
+            } else if (node.equalsIgnoreCase("organisation")) {
+                f.setOrganisation(value);
             }
 
             reader.moveUp();

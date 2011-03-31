@@ -35,6 +35,7 @@ public class File {
     private String extension;
     private String url;
 
+    private String organisation;
     private String website;
     private String name;
     private String description;
@@ -136,6 +137,14 @@ public class File {
 
     public void setStorageType(String storageType) {
         this.storageType = storageType;
+    }
+
+    public String getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(String organisation) {
+        this.organisation = organisation;
     }
 
     @Transient
