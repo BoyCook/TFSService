@@ -37,11 +37,11 @@ public class DummyDataInstaller implements Installer {
                 principalService.create(new Principal("CraigCook", "Craig", "Cook", "password", "craig.cook@bt.com", "07918880501"));
                 principalService.create(new Principal("FooBar", "Foo", "Bar", "password", "craig.cook@bt.com", "07918880501"));
 
-                fileService.create(new File("org.cccs.jslibs", "jsArray", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js"));
-                fileService.create(new File("org.cccs.jslibs", "jsMap", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/map/lib/jsMap.js"));
-                fileService.create(new File("org.cccs.jslibs", "jquery.hintbox", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.hintbox/lib/jquery.hintbox.js"));
-                fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));
-                fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));
+                fileService.create(new File("org.cccs.jslibs", "jsArray", "1.0.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js"));
+                fileService.create(new File("org.cccs.jslibs", "jsMap", "1.0.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/map/lib/jsMap.js"));
+                fileService.create(new File("org.cccs.jslibs", "jquery.hintbox", "1.0.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.hintbox/lib/jquery.hintbox.js"));
+                fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));
+                fileService.create(new File("org.cccs.jslibs", "jquery.collapsible", "1.0.0.1", "js", "https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js"));
                 installed = true;
             } catch (Exception e) {
                 log.debug("Error installing data");

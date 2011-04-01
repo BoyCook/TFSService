@@ -39,7 +39,7 @@ class TestFileConverter extends XMLTestCase {
                 <id>13</id>
                 <groupId>org.cccs.jslibs</groupId>
                 <artefactId>jquery.collapsible</artefactId>
-                <version>1.0</version>
+                <version>1.0.0.0</version>
                 <extension>js</extension>
                 <url>https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js</url>
             </file>
@@ -47,7 +47,7 @@ class TestFileConverter extends XMLTestCase {
                 <id>14</id>
                 <groupId>org.cccs.jslibs</groupId>
                 <artefactId>jquery.collapsible</artefactId>
-                <version>1.0.0</version>
+                <version>1.0.0.1</version>
                 <extension>js</extension>
                 <url>https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js</url>
             </file>
@@ -59,7 +59,7 @@ class TestFileConverter extends XMLTestCase {
             <id>13</id>
             <groupId>org.cccs.jslibs</groupId>
             <artefactId>jquery.collapsible</artefactId>
-            <version>1.0</version>
+            <version>1.0.0.0</version>
             <extension>js</extension>
             <url>https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js</url>
         </file>

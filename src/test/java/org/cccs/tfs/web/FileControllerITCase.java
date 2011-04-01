@@ -48,18 +48,18 @@ public class FileControllerITCase extends JettyIntegrationTestEnvironment {
 
     @Test
     public void getFileShouldWork() {
-        File file = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/jquery.collapsible/1.0.0/");
+        File file = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/jquery.collapsible/1.0.0.0/");
         assertNotNull(file);
 
         assertEquals("org.cccs.jslibs", file.getGroupId());
         assertEquals("jquery.collapsible", file.getArtefactId());
-        assertEquals("1.0.0", file.getVersion());
+        assertEquals("1.0.0.0", file.getVersion());
         assertEquals("https://github.com/BoyCook/JSLibs/raw/master/jquery.collapsible/lib/jquery.collapsible.js", file.getUrl());
     }
 
     @Test
     public void addFileShouldWork() {
-        File f1 = new File("org.cccs.jslibs", "newFile", "1.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
+        File f1 = new File("org.cccs.jslibs", "newFileITCase", "1.0.0.0", "js", "https://github.com/BoyCook/JSLibs/raw/master/array/lib/jsArray.js");
         http(serviceBaseURL + "files/" + f1.getKey() + "/", f1, HttpMethod.PUT);
 
         File f2 = (File) httpGet(serviceBaseURL + "files/" + f1.getKey() + "/");
@@ -73,13 +73,13 @@ public class FileControllerITCase extends JettyIntegrationTestEnvironment {
 
     @Test
     public void updateFileShouldWork() {
-        File f1 = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/jsarray/1.0/");
+        File f1 = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/newFileITCase/1.0.0.0/");
         assertNotNull(f1);
         f1.setWebsite("boycook.com");
         f1.setDescription("Extensions to array");
 
         http(serviceBaseURL + "files/" + f1.getKey() + "/", f1, HttpMethod.POST);
-        File f2 = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/jsarray/1.0/");
+        File f2 = (File) httpGet(serviceBaseURL + "files/org.cccs.jslibs/newFileITCase/1.0.0.0/");
 
         assertThat(f1.getWebsite(), is(equalTo(f2.getWebsite())));
         assertThat(f1.getDescription(), is(equalTo(f2.getDescription())));

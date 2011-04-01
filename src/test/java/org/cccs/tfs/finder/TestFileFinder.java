@@ -42,7 +42,7 @@ public class TestFileFinder {
     public void searchByParamsShouldWork() throws Exception {
         Map<String, String[]> parameters = new HashMap<String, String[]>();
         parameters.put("groupId", new String[] {"org.cccs.jslibs"});
-        parameters.put("version", new String[] {"1.0.0"});
+        parameters.put("version", new String[] {"1.0.0.1"});
 
         List<File> files = finder.search(parameters);
         assertThat(files.size(), is(equalTo(1)));
