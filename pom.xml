@@ -7,11 +7,10 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>TFS Service</name>
     <url>http://craigcook.co.uk/tfs</url>
-
     <parent>
-        <groupId>org.cccs.build</groupId>
-        <artifactId>parent-pom</artifactId>
-        <version>1.0.1</version>
+    	<groupId>org.cccs.build</groupId>
+    	<artifactId>parent-pom</artifactId>
+	    <version>1.0.1-SNAPSHOT</version>
     </parent>
     <developers>
         <developer>
