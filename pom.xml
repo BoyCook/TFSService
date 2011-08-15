@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cccs.tfs</groupId>
-    <artifactId>service</artifactId>
+    <artifactId>tfs-service</artifactId>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <name>TFS Service</name>
@@ -134,11 +134,6 @@
         </dependency>
         <!-- Spring END-->
 
-        <!--<dependency>-->
-        <!--<groupId>com.h2database</groupId>-->
-        <!--<artifactId>h2</artifactId>-->
-        <!--<version>1.2.140</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
@@ -171,11 +166,11 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>com.springsource.org.apache.commons.fileupload</artifactId>
-            <version>1.2.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.commons</groupId>-->
+            <!--<artifactId>com.springsource.org.apache.commons.fileupload</artifactId>-->
+            <!--<version>1.2.0</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -192,27 +187,6 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.1.0.Final</version>
         </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-entitymanager</artifactId>-->
-        <!--<version>3.6.1.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-annotations</artifactId>-->
-        <!--<version>${hibernate.annotations.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-validator</artifactId>-->
-        <!--<version>${hibernate-validator-version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-search</artifactId>-->
-        <!--<version>${hibernate-search-version}</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>commons-io</groupId>
@@ -241,11 +215,6 @@
             <scope>provided</scope>
             <version>2.5</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>javax.jms</groupId>-->
-            <!--<artifactId>jms</artifactId>-->
-            <!--<version>1.1</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.slf4j</groupId>
