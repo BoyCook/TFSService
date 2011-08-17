@@ -144,6 +144,7 @@
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>1.8.0.7</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>javassist</groupId>
@@ -205,6 +206,7 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>1.6.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
